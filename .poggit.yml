@@ -1,0 +1,4 @@
+projects:
+  libInterpolation:
+    type: library
+    model: virion
