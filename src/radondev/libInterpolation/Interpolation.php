@@ -14,11 +14,17 @@ class Interpolation
      * @param float $first
      * @param float $second
      * @param float $percentage Number between 0.0 and 1.0
+     * @param bool $minecraftYaw When working with minecraft yaw values (ranging from 0 to 360) this should be enabled to produce usable results
      * @return float
      */
-    public static function linearValue(float $first, float $second, float $percentage): float
+    public static function linearValue(float $first, float $second, float $percentage, bool $minecraftYaw = false): float
     {
-        return ($second - $first) * $percentage + $first;
+        $delta = (!$minecraftYaw) ? ($second - $first) : min(
+            fmod(360 - $first + $second, 360),
+            fmod(360 - $second + $first, 360)
+        );
+
+        return $delta * $percentage + $first;
     }
 
     /**
@@ -127,11 +133,17 @@ class Interpolation
      * @param float $first
      * @param float $second
      * @param float $percentage
+     * @param bool $minecraftYaw When working with minecraft yaw values (ranging from 0 to 360) this should be enabled to produce usable results
      * @return float
      */
-    public static function cubicSmooth(float $first, float $second, float $percentage): float
+    public static function cubicSmoothValue(float $first, float $second, float $percentage, bool $minecraftYaw = false): float
     {
-        return ($second - $first) * (-2 * $percentage ** 3 + 3 * $percentage ** 2) + $first;
+        $delta = (!$minecraftYaw) ? ($second - $first) : min(
+            fmod(360 - $first + $second, 360),
+            fmod(360 - $second + $first, 360)
+        );
+
+        return $delta * (-2 * $percentage ** 3 + 3 * $percentage ** 2) + $first;
     }
 
     /**
