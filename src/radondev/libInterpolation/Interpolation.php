@@ -142,10 +142,14 @@ class Interpolation
      */
     public static function cubicSmoothValue(float $first, float $second, float $percentage, bool $minecraftYaw = false): float
     {
-        $delta = (!$minecraftYaw) ? ($second - $first) : min(
-            fmod(360 - $first + $second, 360),
-            fmod(360 - $second + $first, 360)
-        );
+        if (!$minecraftYaw) {
+            $delta = $second - $first;
+        } else {
+            $d1 = fmod(360 - $first + $second, 360);
+            $d2 = fmod(-360 - $first + $second, 360);
+
+            $delta = $d1 < abs($d2) ? $d1 : $d2;
+        }
 
         return $delta * (-2 * $percentage ** 3 + 3 * $percentage ** 2) + $first;
     }
