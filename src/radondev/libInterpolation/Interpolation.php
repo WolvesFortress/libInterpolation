@@ -133,6 +133,7 @@ class Interpolation
      * Smooths the movement between the two values by accelerating and decelerating.
      * Source: "Math for Game Developers - Removing Abrupt Transitions (Cubic Interpolation)" by Jorge Rodriguez (https://youtu.be/PqQH3r5Ia-Y)
      * @see https://youtu.be/PqQH3r5Ia-Y
+     * @see https://bit.ly/3yJXKSU for the graph
      *
      * @param float $first
      * @param float $second
@@ -159,6 +160,7 @@ class Interpolation
      * Smooths the movement between the two vectors by accelerating and decelerating.
      * Source: "Math for Game Developers - Removing Abrupt Transitions (Cubic Interpolation)" by Jorge Rodriguez (https://youtu.be/PqQH3r5Ia-Y)
      * @see https://youtu.be/PqQH3r5Ia-Y
+     * @see https://bit.ly/3yJXKSU for the graph
      *
      * @param Vector3 $first
      * @param Vector3 $second
