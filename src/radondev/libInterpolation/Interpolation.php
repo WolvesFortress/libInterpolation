@@ -179,6 +179,32 @@ class Interpolation
      * @see https://youtu.be/9_aJGUTePYo
      * @see https://en.wikipedia.org/wiki/Cubic_Hermite_spline
      *
+     * @param float $p0 Used as the starting control point for the actual curve between $p1 and $p2
+     * @param float $p1 The starting point of the interpolated curve
+     * @param float $p2 The ending point of the interpolated curve
+     * @param float $p3 Used as the ending control point for the actual curve between $p1 and $p2
+     * @param float $percentage Number between 0.0 and 1.0
+     * @param float $alpha Standard uniform Catmull-Rom spline: 0.0; Centripetal Catmull–Rom spline: 0.5; Chordal Catmull-Rom spline
+     * @return float
+     */
+    public static function catmullRomSplinesValue(float $p0, float $p1, float $p2, float $p3, float $percentage, float $alpha = 0.5): float
+    {
+        $percentageSquared = $percentage ** 2;
+        $percentageCubed = $percentage ** 3;
+
+        $q1 = -$percentageCubed + 2.0 * $percentageSquared - $percentage;
+        $q2 = 3.0 * $percentageCubed - 5.0 * $percentageSquared + 2.0;
+        $q3 = -3.0 * $percentageCubed + 4.0 * $percentageSquared + $percentage;
+        $q4 = $percentageCubed - $percentageSquared;
+
+        return $alpha * ($p0 * $q1 + $p1 * $q2 + $p2 * $q3 + $p3 * $q4);
+    }
+
+    /**
+     * Source: "Programming & Using Splines - Part#1" by javidx9 (https://youtu.be/9_aJGUTePYo)
+     * @see https://youtu.be/9_aJGUTePYo
+     * @see https://en.wikipedia.org/wiki/Cubic_Hermite_spline
+     *
      * @param Vector3 $p0 Used as the starting control point for the actual curve between $p1 and $p2
      * @param Vector3 $p1 The starting point of the interpolated curve
      * @param Vector3 $p2 The ending point of the interpolated curve
@@ -187,7 +213,7 @@ class Interpolation
      * @param float $alpha Standard uniform Catmull-Rom spline: 0.0; Centripetal Catmull–Rom spline: 0.5; Chordal Catmull-Rom spline
      * @return Vector3
      */
-    public static function catmullRomSplines(Vector3 $p0, Vector3 $p1, Vector3 $p2, Vector3 $p3, float $percentage, float $alpha = 0.5): Vector3
+    public static function catmullRomSplinesVector(Vector3 $p0, Vector3 $p1, Vector3 $p2, Vector3 $p3, float $percentage, float $alpha = 0.5): Vector3
     {
         $percentageSquared = $percentage ** 2;
         $percentageCubed = $percentage ** 3;
