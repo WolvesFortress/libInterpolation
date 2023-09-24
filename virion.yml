@@ -1,6 +1,6 @@
 name: libInterpolation
 version: 0.1.0
 antigen: radondev\libInterpolation
-api: [3.0.0, 4.0.0]
+api: [ 3.0.0, 4.0.0, 5.0.0 ]
 author: radondev
 description: libInterpolation can be used to calculate interpolated positions and rotations for e.g. smooth entity movement animations in trailers or cutscenes.
